@@ -3,12 +3,8 @@
 **Entorno de desarrollo:**  
 - Máquina virtual: Ubuntu 22.04  
 - Sistema operativo: Linux  
-- Odoo: versión 18  
-
-## Ramas del repositorio
-- `main` - rama principal, contiene la versión estable del proyecto  
-- `dev` - rama de desarrollo, para probar y agregar nuevas funcionalidades  
-
+- Odoo: versión 18
+  
 ## Integrantes
 - Valentina Vargas  
 - Lucila Velardez  
@@ -17,3 +13,44 @@
 
 ## Tutor
 - Agustín Bordón
+
+## Ramas del repositorio
+- `main` - rama principal, contiene la versión estable del proyecto  
+- `dev` - rama de desarrollo, para probar y agregar nuevas funcionalidades  
+
+## Instalación / Uso
+Este repositorio debe ser incorporado dentro de un entorno Odoo.  
+La carpeta del proyecto se ubica, por ejemplo, en:  
+
+Workspace/Odoo 18/odoo/custom/src/curso
+
+(donde `curso` es la carpeta creada para este proyecto).  
+
+Dentro del directorio del proyecto, ejecutar:  
+
+`inv start`
+
+Luego ingresar en el navegador a:  
+
+http://localhost:18069
+
+En la pantalla de login:  
+- **Base de datos:** `devel`  
+- **Usuario:** `admin`  
+- **Contraseña:** `admin`  
+
+## Comandos básicos con `invoke (inv)`
+
+- **Levantar el entorno:**  
+  `inv start`  
+  Levanta los contenedores del entorno.  
+
+- **Detener el entorno:**  
+  `inv stop`  
+  Detiene todos los contenedores del entorno.  
+
+- **Reiniciar el entorno:**  
+  `inv restart`  
+  Detiene los contenedores de Odoo y los vuelve a levantar.  
+
+
