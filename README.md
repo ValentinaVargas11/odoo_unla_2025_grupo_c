@@ -26,6 +26,14 @@ Workspace/Odoo 18/odoo/custom/src/curso
 
 (donde `curso` es la carpeta creada para este proyecto).  
 
+**Importante:**  
+En el archivo `addons.yaml` de tu entorno Odoo, es necesario agregar la siguiente línea para que el sistema reconozca todas las carpetas dentro de `curso`:  
+
+`
+curso:
+   "*"
+`
+
 Dentro del directorio del proyecto, ejecutar:  
 
 `inv start`
