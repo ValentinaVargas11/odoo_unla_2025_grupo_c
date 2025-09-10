@@ -1,4 +1,3 @@
-from datetime import date
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields
 class EstateProperty(models.Model):
@@ -10,7 +9,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char(string = "Código Postal")
     date_availability = fields.Date(string="Fecha disponibilidad", 
                                     copy=False, 
-                                    default=lambda self: date.today() + relativedelta(months=3))
+                                    default=lambda self: fields.Date.today() + relativedelta(months=3))
     expected_price = fields.Float(string="Precio esperado")
     selling_price = fields.Float(string="Precio de venta", copy=False)
     bedrooms = fields.Integer(string="Habitaciones", default=2)
