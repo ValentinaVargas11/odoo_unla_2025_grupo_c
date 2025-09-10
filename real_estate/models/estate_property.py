@@ -26,3 +26,16 @@ class EstateProperty(models.Model):
                                             default="north",
                                             string="Orientación del jardín")
     garden_area = fields.Integer(string="Superficie jardín")
+    state = fields.Selection(
+        [
+            ('new', 'Nuevo'),
+            ('offer_received', 'Oferta recibida'),
+            ('offer_accepted', 'Oferta aceptada'),
+            ('sold', 'Vendido'),
+            ('canceled', 'Cancelado')
+        ],
+        string="Estado",
+        required=True,
+        copy=False,
+        default="new"
+    )
