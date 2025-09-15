@@ -23,6 +23,8 @@
                         <filter name="group_by_user" string="Usuario" context="{'group_by':'create_uid'}"/>
                         <filter name="group_by_month" string="Mes" context="{'group_by':'create_date:month'}"/>
                         <filter name="group_by_postcode" string="Código Postal" context="{'group_by':'postcode'}"/>
+                        <filter name="available_properties" string="Propiedades disponibles" domain="[('state','in', ['new','offer_received'])]"/>
+                        <filter name="group_by_estado" string="Agrupar por Estado" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
@@ -45,7 +47,57 @@
             </field>
         </record>
 
-        
+        <!-- Vista de formulario punto 23 -->
+        <record id="view_estate_property_form" model="ir.ui.view">
+            <field name="name">estate.property.form</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <form string="Form">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1> 
+                                <field name="name" placeholder="Nombre Propiedad"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Details">
+                                <group>
+                                    <group>
+                                        <field name="description"/>
+                                        <field name="bedrooms"/>
+                                        <field name="living_area"/>
+                                        <field name="facades"/>
+                                        <field name="garage"/>
+                                    </group>
+                                    <group>
+                                        <field name="garden"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                        
+                                    </group>
+                                </group>
+                                
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
         
         <!-- Asociar la vista search a la acción de ventana existente -->
         <record id="estate_property_action" model="ir.actions.act_window">
