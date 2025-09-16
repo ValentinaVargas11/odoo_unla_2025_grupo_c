@@ -61,3 +61,18 @@ class EstateProperty(models.Model):
     tracking=True,
     default=lambda self: self.env.user
 )
+
+    # Ejercicio 35 - Relación Many2many 
+    tag_ids = fields.Many2many(
+        "estate.property.tag",
+        string="Etiquetas"
+    )
+
+    # Ejercicio 36 - Relación One2Many 
+
+    offer_ids = fields.One2many(
+        comodel_name = "estate_property_offer",
+        inverse_name = "property_id",
+        string = "Ofertas"
+    )
+

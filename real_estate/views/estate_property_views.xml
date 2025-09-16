@@ -9,6 +9,7 @@
                 <search string="Buscar Propiedades">
                     <!-- Campos de búsqueda -->
                     <field name="name"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
                     <field name="postcode"/>
                     <field name="expected_price"/>
                     <field name="bedrooms"/>
@@ -49,62 +50,65 @@
 
         <!-- Vista de formulario punto 23 -->
         <record id="view_estate_property_form" model="ir.ui.view">
-            <field name="name">estate.property.form</field>
-            <field name="model">estate.property</field>
-            <field name="arch" type="xml">
-                <form string="Form">
-    <header>
-        <field name="state" widget="statusbar"/>
-    </header>
-    <sheet>
-        <group>
-            <h1> 
-                <field name="name" placeholder="Nombre Propiedad"/>
-            </h1>
-        </group>
-        <group>
-            <group>
-                <field name="property_type_id"/>
-                <field name="postcode"/>
-                <field name="date_availability"/>
-            </group>
-            <group>
-                <field name="expected_price"/>
-                <field name="selling_price"/>
-            </group>
-        </group>
-        
-        <notebook>
-            <page string="Details">
+    <field name="name">estate.property.form</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+        <form string="Form">
+            <header>
+                <field name="state" widget="statusbar"/>
+            </header>
+            <sheet>
+                <group>
+                    <h1> 
+                        <field name="name" placeholder="Nombre Propiedad"/>
+                    </h1>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </group>
                 <group>
                     <group>
-                        <field name="description"/>
-                        <field name="bedrooms"/>
-                        <field name="living_area"/>
-                        <field name="facades"/>
-                        <field name="garage"/>
+                        <field name="property_type_id"/>
+                        <field name="postcode"/>
+                        <field name="date_availability"/>
                     </group>
                     <group>
-                        <field name="garden"/>
-                        <field name="garden_area"/>
-                        <field name="garden_orientation"/>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
                     </group>
                 </group>
-            </page>
-            
-            <!-- Nueva pestaña "Más info." -->
-            <page string="Más info.">
-                <group>
-                    <field name="buyer_id"/>
-                    <field name="salesman_id"/>
-                </group>
-            </page>
-        </notebook>
-    </sheet>
-</form>
+                
+                <notebook>
+                    <page string="Details">
+                        <group>
+                            <group>
+                                <field name="description"/>
+                                <field name="bedrooms"/>
+                                <field name="living_area"/>
+                                <field name="facades"/>
+                                <field name="garage"/>
+                            </group>
+                            <group>
+                                <field name="garden"/>
+                                <field name="garden_area"/>
+                                <field name="garden_orientation"/>
+                            </group>
+                        </group>
+                    </page>
 
-            </field>
-        </record>
+                    <page name="offers" string="Ofertas">
+                        <field name="offer_ids"/>
+                    </page>
+
+                    <page string="Más info.">
+                        <group>
+                            <field name="buyer_id"/>
+                            <field name="salesman_id"/>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
         
         <!-- Asociar la vista search a la acción de ventana existente -->
         <record id="estate_property_action" model="ir.actions.act_window">
