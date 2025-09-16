@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu de primer nivel "Ajustes" dentro de "Inmobiliaria" -->
+    <menuitem id="menu_estate_settings"
+              name="Ajustes"
+              parent="menu_estate_root"
+              sequence="20"/>
+
+    <!-- Submenu que conecta con la accion de "Tipos de propiedad" -->
+    <menuitem id="menu_estate_property_type"
+              name="Tipos de propiedad"
+              parent="menu_estate_settings"
+              action="action_estate_property_type"
+              sequence="30"/>
+</odoo>
