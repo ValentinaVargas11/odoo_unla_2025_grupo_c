@@ -9,6 +9,7 @@
                 <search string="Buscar Propiedades">
                     <!-- Campos de búsqueda -->
                     <field name="name"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
                     <field name="postcode"/>
                     <field name="expected_price"/>
                     <field name="bedrooms"/>
@@ -61,6 +62,7 @@
                             <h1> 
                                 <field name="name" placeholder="Nombre Propiedad"/>
                             </h1>
+                            <field name="tag_ids" widget="many2many_tags"/>
                         </group>
                         <group>
                             <group>

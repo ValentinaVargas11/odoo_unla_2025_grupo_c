@@ -39,3 +39,9 @@ class EstateProperty(models.Model):
         copy=False,
         default="new"
     )
+
+    # Ejercicio 35 - Relación Many2many 
+    tag_ids = fields.Many2many(
+        "estate.property.tag",
+        string="Etiquetas"
+    )
