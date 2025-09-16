@@ -94,6 +94,9 @@
                                 </group>
                                 
                             </page>
+                            <page name="offers" string="Ofertas">
+                                <field name="offer_ids"/>
+                            </page>
                         </notebook>
                     </sheet>
                     
