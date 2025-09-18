@@ -60,3 +60,9 @@ class EstateProperty(models.Model):
         tracking=True,
         default=lambda self: self.env.user
     )
+
+    # Ejercicio 35 - Relación Many2many 
+    tag_ids = fields.Many2many(
+        "estate.property.tag",
+        string="Etiquetas"
+    )
