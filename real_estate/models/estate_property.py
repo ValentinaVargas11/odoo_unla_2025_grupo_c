@@ -66,3 +66,11 @@ class EstateProperty(models.Model):
         "estate.property.tag",
         string="Etiquetas"
     )
+
+    # Ejercicio 36 - Relación One2Many 
+
+   # offer_ids = fields.One2many(
+   #     comodel_name = "estate_property_offer",
+   #     inverse_name = "property_id",
+    #    string = "Ofertas"
+    #) -->

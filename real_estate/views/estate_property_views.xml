@@ -60,6 +60,8 @@
                         <group>
                             <h1> 
                                 <field name="name" placeholder="Nombre Propiedad"/>
+                                <!-- <field name="tag_ids" widget="many2many_tags"/> -->
+
                             </h1>
                         </group>
                         <group>
