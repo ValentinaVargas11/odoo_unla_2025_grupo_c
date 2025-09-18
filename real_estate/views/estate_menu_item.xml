@@ -9,7 +9,8 @@
             </menuitem>
 
             <menuitem id='menu_estate_property_type'  name='Ajustes'>
-                <menuitem id='menu_estate_settings_action'  action='action_estate_property_type'/>
+                <menuitem id='menu_estate_property_settings_action'  action='action_estate_property_type'/>
+                <menuitem id='menu_estate_property_tag_action'  action='action_estate_property_tag'/>
             </menuitem>
         </menuitem>
 
