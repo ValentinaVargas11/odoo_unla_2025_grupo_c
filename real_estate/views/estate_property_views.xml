@@ -9,7 +9,6 @@
                 <search string="Buscar Propiedades">
                     <!-- Campos de búsqueda -->
                     <field name="name"/>
-                    <field name="tag_ids" widget="many2many_tags"/>
                     <field name="postcode"/>
                     <field name="expected_price"/>
                     <field name="bedrooms"/>
@@ -70,12 +69,10 @@
                                 <field name="property_type_id"/>
                                 <field name="postcode"/>
                                 <field name="date_availability"/>
-
                             </group>
                             <group>
-                                <field name="garden"/>
-                                <field name="garden_area"/>
-                                <field name="garden_orientation"/>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
                             </group>
                         </group>
                         
@@ -118,7 +115,6 @@
                 </form>
             </field>
         </record>
-
         
         <!-- Asociar la vista search a la acción de ventana existente -->
         <record id="estate_property_action" model="ir.actions.act_window">

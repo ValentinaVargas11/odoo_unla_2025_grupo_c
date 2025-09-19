@@ -39,7 +39,6 @@ class EstateProperty(models.Model):
         copy=False,
         default="new"
     )
-
     #Many2one al modelo estate.property.type
     property_type_id = fields.Many2one(
         comodel_name='estate.property.type',
@@ -62,7 +61,6 @@ class EstateProperty(models.Model):
         default=lambda self: self.env.user
     )
 
-
     # Ejercicio 35 - Relación Many2many 
     tag_ids = fields.Many2many(
         "estate.property.tag",
@@ -76,4 +74,3 @@ class EstateProperty(models.Model):
         inverse_name = "property_id",
         string = "Ofertas"
     ) 
-
