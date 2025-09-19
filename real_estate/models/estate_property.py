@@ -40,7 +40,7 @@ class EstateProperty(models.Model):
         default="new"
     )
 
-     #Many2one al modelo estate.property.type
+    #Many2one al modelo estate.property.type
     property_type_id = fields.Many2one(
         comodel_name='estate.property.type',
         string='Tipo Propiedad'
@@ -54,13 +54,14 @@ class EstateProperty(models.Model):
 
     #Many2one al modelo res.users
     salesman_id = fields.Many2one(
-    comodel_name='res.users',
-    string='Vendedor',
-    copy=False,
-    index=True,
-    tracking=True,
-    default=lambda self: self.env.user
-)
+        comodel_name='res.users',
+        string='Vendedor',
+        copy=False,
+        index=True,
+        tracking=True,
+        default=lambda self: self.env.user
+    )
+
 
     # Ejercicio 35 - Relación Many2many 
     tag_ids = fields.Many2many(
@@ -71,8 +72,8 @@ class EstateProperty(models.Model):
     # Ejercicio 36 - Relación One2Many 
 
     offer_ids = fields.One2many(
-        comodel_name = "estate_property_offer",
+        comodel_name = "estate.property.offer",
         inverse_name = "property_id",
         string = "Ofertas"
-    )
+    ) 
 
