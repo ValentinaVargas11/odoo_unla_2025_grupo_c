@@ -95,6 +95,11 @@
                                 </group>
                                 
                             </page>
+                            <page name="offers" string="Ofertas">
+                                <group>
+                                    <field name="offer_ids"/>
+                                </group>
+                            </page>
                         </notebook>
                         <notebook>
                             <page string="More information">

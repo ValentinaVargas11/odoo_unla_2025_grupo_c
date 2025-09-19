@@ -69,8 +69,8 @@ class EstateProperty(models.Model):
 
     # Ejercicio 36 - Relación One2Many 
 
-   # offer_ids = fields.One2many(
-   #     comodel_name = "estate_property_offer",
-   #     inverse_name = "property_id",
-    #    string = "Ofertas"
-    #) -->
+    offer_ids = fields.One2many(
+        comodel_name = "estate.property.offer",
+        inverse_name = "property_id",
+        string = "Ofertas"
+    ) 
