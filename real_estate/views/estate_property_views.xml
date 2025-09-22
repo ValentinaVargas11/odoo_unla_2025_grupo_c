@@ -100,16 +100,15 @@
                                     <field name="offer_ids"/>
                                 </group>
                             </page>
-                        </notebook>
-                        <notebook>
-                            <page string="More information">
+                             <page string="More information">
                                 <group>
                                     <field name="buyer_id"/>
                                     <field name="salesman_id"/>
                                 </group>
-                                
+
                             </page>
                         </notebook>
+
                     </sheet>
                     
                 </form>
