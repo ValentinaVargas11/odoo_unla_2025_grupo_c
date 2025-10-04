@@ -40,8 +40,8 @@ class EstateProperty(models.Model):
         default="new"
     )
 
-    # Ejercicio 1 - Uni 2 Campo computado
-    total_area = fields.Integer(string="Superficie Total", compute="_compute_total_area" )
+    # Ejercicio 1 - 5 - Uni 2 Campo computado
+    total_area = fields.Integer(string="Superficie Total", compute="_compute_total_area", store=True)
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
