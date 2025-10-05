@@ -48,6 +48,14 @@ class EstateProperty(models.Model):
         for property in self:
             property.total_area = property.living_area + property.garden_area
 
+    # Ejercicio 7  Uni 2 Campo computado
+    best_offer = fields.Float(string="Mejor oferta", compute="_compute_best_offer")
+
+    @api.depends("offer_ids.price")
+    def _compute_best_offer(self):
+        for property in self:
+            property.best_offer = max(property.mapped('offer_ids.price'))
+
     #Many2one al modelo estate.property.type
     property_type_id = fields.Many2one(
         comodel_name='estate.property.type',
