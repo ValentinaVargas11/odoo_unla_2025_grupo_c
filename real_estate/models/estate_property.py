@@ -54,7 +54,7 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids.price")
     def _compute_best_offer(self):
         for property in self:
-            property.best_offer = max(property.mapped('offer_ids.price'))
+            property.best_offer = max(property.offer_ids.mapped('price'), default= 0) 
 
     #Many2one al modelo estate.property.type
     property_type_id = fields.Many2one(
