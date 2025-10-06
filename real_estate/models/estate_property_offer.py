@@ -14,11 +14,11 @@ class EstatePropertyOffer(models.Model):
         ]
     )
     partner_id = fields.Many2one(
-        comodel = "res.partner",
+        comodel_name = "res.partner",
         string = "Ofertante", required = True,
     )
     property_id = fields.Many2one(
-        comodel = "estate.property",
+        comodel_name = "estate.property",
         string = "Propiedad", required = True
     )
 

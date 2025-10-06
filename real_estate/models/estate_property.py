@@ -1,5 +1,5 @@
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields
+from odoo import api,models, fields
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Propiedades'
@@ -39,6 +39,15 @@ class EstateProperty(models.Model):
         copy=False,
         default="new"
     )
+
+    # Ejercicio 1 - 5 - Uni 2 Campo computado
+    total_area = fields.Integer(string="Superficie Total", compute="_compute_total_area", store=True)
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for property in self:
+            property.total_area = property.living_area + property.garden_area
+
     #Many2one al modelo estate.property.type
     property_type_id = fields.Many2one(
         comodel_name='estate.property.type',

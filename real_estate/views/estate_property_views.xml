@@ -82,32 +82,30 @@
                                     <group>
                                         <field name="description"/>
                                         <field name="bedrooms"/>
-                                        <field name="living_area"/>
                                         <field name="facades"/>
                                         <field name="garage"/>
                                     </group>
                                     <group>
                                         <field name="garden"/>
                                         <field name="garden_area"/>
+                                        <field name="living_area"/>
+                                        <field name="total_area"/>
                                         <field name="garden_orientation"/>
-                                        
                                     </group>
                                 </group>
-                                
                             </page>
+
                             <page name="offers" string="Ofertas">
                                 <group>
                                     <field name="offer_ids"/>
                                 </group>
                             </page>
-                        </notebook>
-                        <notebook>
+
                             <page string="More information">
                                 <group>
                                     <field name="buyer_id"/>
                                     <field name="salesman_id"/>
                                 </group>
-                                
                             </page>
                         </notebook>
                     </sheet>
