@@ -8,23 +8,29 @@
             <field name="arch" type="xml">
                 <search string="Buscar Propiedades">
                     <!-- Campos de búsqueda -->
-                    <field name="name"/>
-                    <field name="postcode"/>
-                    <field name="expected_price"/>
-                    <field name="bedrooms"/>
-                    <field name="living_area"/>
-                    <field name="facades"/>
+                    <field name="name" />
+                    <field name="postcode" />
+                    <field name="expected_price" />
+                    <field name="bedrooms" />
+                    <field name="living_area" />
+                    <field name="facades" />
 
                     <!-- Filtro para mostrar solo los registros creados por el usuario actual -->
-                    <filter name="my_properties" string="Mis Propiedades" domain="[('create_uid','=',uid)]"/>
+                    <filter name="my_properties" string="Mis Propiedades"
+                        domain="[('create_uid','=',uid)]" />
 
                     <!-- Agrupamientos -->
                     <group expand="1" string="Agrupar por">
-                        <filter name="group_by_user" string="Usuario" context="{'group_by':'create_uid'}"/>
-                        <filter name="group_by_month" string="Mes" context="{'group_by':'create_date:month'}"/>
-                        <filter name="group_by_postcode" string="Código Postal" context="{'group_by':'postcode'}"/>
-                        <filter name="available_properties" string="Propiedades disponibles" domain="[('state','in', ['new','offer_received'])]"/>
-                        <filter name="group_by_estado" string="Agrupar por Estado" context="{'group_by':'state'}"/>
+                        <filter name="group_by_user" string="Usuario"
+                            context="{'group_by':'create_uid'}" />
+                        <filter name="group_by_month" string="Mes"
+                            context="{'group_by':'create_date:month'}" />
+                        <filter name="group_by_postcode" string="Código Postal"
+                            context="{'group_by':'postcode'}" />
+                        <filter name="available_properties" string="Propiedades disponibles"
+                            domain="[('state','in', ['new','offer_received'])]" />
+                        <filter name="group_by_estado" string="Agrupar por Estado"
+                            context="{'group_by':'state'}" />
                     </group>
                 </search>
             </field>
@@ -36,13 +42,13 @@
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <list string="Propiedades">
-                    <field name="name"/>
-                    <field name="postcode"/>
-                    <field name="bedrooms"/>
-                    <field name="living_area"/>
-                    <field name="expected_price"/>
-                    <field name="selling_price"/>
-                    <field name="date_availability"/>
+                    <field name="name" />
+                    <field name="postcode" />
+                    <field name="bedrooms" />
+                    <field name="living_area" />
+                    <field name="expected_price" />
+                    <field name="selling_price" />
+                    <field name="date_availability" />
                 </list>
             </field>
         </record>
@@ -54,72 +60,82 @@
             <field name="arch" type="xml">
                 <form string="Form">
                     <header>
-                        <field name="state" widget="statusbar"/>
+                        <button name="action_cancel"
+                            type="object"
+                            string="Cancelar"
+                            class="btn-secondary"
+                            invisible="state in ['sold', 'canceled']" />
+                        <button name="action_mark_sold"
+                            type="object"
+                            string="Marcar como vendida"
+                            class="btn-primary"
+                            invisible="state not in ['offer_accepted']"/>
+                        <field name="state" widget="statusbar" />
                     </header>
                     <sheet>
                         <group>
-                            <h1> 
-                                <field name="name" placeholder="Nombre Propiedad"/>
+                            <h1>
+                                <field name="name" placeholder="Nombre Propiedad" />
                                 <!-- <field name="tag_ids" widget="many2many_tags"/> -->
 
                             </h1>
                         </group>
                         <group>
                             <group>
-                                <field name="property_type_id"/>
-                                <field name="postcode"/>
-                                <field name="date_availability"/>
+                                <field name="property_type_id" />
+                                <field name="postcode" />
+                                <field name="date_availability" />
                             </group>
                             <group>
-                                <field name="expected_price"/>
-                                <field name="selling_price"/>
+                                <field name="expected_price" />
+                                <field name="selling_price" />
                             </group>
                         </group>
-                        
+
                         <notebook>
                             <page string="Details">
                                 <group>
                                     <group>
-                                        <field name="description"/>
-                                        <field name="bedrooms"/>
-                                        <field name="living_area"/>
-                                        <field name="facades"/>
-                                        <field name="garage"/>
+                                        <field name="description" />
+                                        <field name="bedrooms" />
+                                        <field name="living_area" />
+                                        <field name="facades" />
+                                        <field name="garage" />
                                     </group>
                                     <group>
-                                        <field name="garden"/>
-                                        <field name="garden_area"/>
-                                        <field name="garden_orientation"/>
-                                        
+                                        <field name="garden" />
+                                        <field name="garden_area" />
+                                        <field name="garden_orientation" />
+
                                     </group>
                                 </group>
                             </page>
 
                             <page name="offers" string="Ofertas">
                                 <group>
-                                    <field name="offer_ids"/>
+                                    <field name="offer_ids" />
                                 </group>
                             </page>
 
                             <page string="More information">
                                 <group>
-                                    <field name="buyer_id"/>
-                                    <field name="salesman_id"/>
+                                    <field name="buyer_id" />
+                                    <field name="salesman_id" />
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
-                    
+
                 </form>
             </field>
         </record>
-        
+
         <!-- Asociar la vista search a la acción de ventana existente -->
         <record id="estate_property_action" model="ir.actions.act_window">
             <field name="name">Propiedades</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">list,form</field>
-            <field name="search_view_id" ref="estate_property_search_view"/>
+            <field name="search_view_id" ref="estate_property_search_view" />
         </record>
     </data>
 </odoo>

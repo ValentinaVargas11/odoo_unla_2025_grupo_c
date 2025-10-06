@@ -1,5 +1,5 @@
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields
+from odoo import models, fields, api
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Propiedades'
@@ -68,9 +68,46 @@ class EstateProperty(models.Model):
     )
 
     # Ejercicio 36 - Relación One2Many 
-
     offer_ids = fields.One2many(
         comodel_name = "estate.property.offer",
         inverse_name = "property_id",
         string = "Ofertas"
     ) 
+    
+    # Unidad 2 - Ejercicio 13
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        """Cuando se cambia el campo garden, actualiza garden_area"""
+        for record in self:
+            if record.garden:
+                record.garden_area = 10
+            else:
+                record.garden_area = 0
+                
+    # Unidad 2 - Ejercicio 14
+    @api.onchange('expected_price')
+    def _onchange_expected_price(self):
+        """Muestra advertencia si el precio esperado es menor a 10000"""
+        for record in self:
+            if record.expected_price and record.expected_price < 10000:
+                return {
+                    'warning': {
+                        'title': 'Precio bajo',
+                        'message': 'El precio ingresado es bajo, tal vez sea un error de tipeo'
+                    }
+                }
+
+    # Unidad 2 - Ejercicio 15
+    def action_mark_sold(self):
+        """Marca la propiedad como vendida"""
+        for record in self:
+            if record.state == 'canceled':
+                raise UserError("No se puede vender una propiedad cancelada")
+            record.state = 'sold'
+
+    def action_cancel(self):
+        """Cancela la propiedad"""
+        for record in self:
+            if record.state == 'sold':
+                raise UserError("No se puede cancelar una propiedad vendida")
+            record.state = 'canceled'

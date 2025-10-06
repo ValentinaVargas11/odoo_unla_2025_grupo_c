@@ -5,12 +5,12 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <list string="Etiquetas de propiedad" editable="top">
-                <field name="price"/>
-                <field name="partner_id"/>
-                <field name="status"/>
+                <field name="price" />
+                <field name="partner_id" />
+                <field name="status" />
+                <button name="action_accept_offer" string="Aceptar" type="object" class="btn-primary" icon="fa-check"/>                  
+                <button name="action_refuse_offer" string="Rechazar" type="object" class="btn-secondary" icon="fa-times"/>
             </list>
         </field>
     </record>
-
-    
 </odoo>
