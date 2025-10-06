@@ -8,6 +8,12 @@
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="status"/>
+
+                <!-- Punto 9-->
+                <field name="validity"/>
+                <field name="date_deadline"/>
+                <!-- Punto 11 <field name="property_type_id"/>-->
+                 
             </list>
         </field>
     </record>
