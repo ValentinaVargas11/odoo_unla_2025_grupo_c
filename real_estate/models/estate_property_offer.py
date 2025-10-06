@@ -19,24 +19,3 @@ class EstatePropertyOffer(models.Model):
         comodel_name = "estate.property",
         string = "Propiedad", required = True
     )
-    
-    # Ejercicio 16 - Botón Aceptar oferta
-    def action_accept_offer(self):
-        """Aceptar una oferta:
-        - marca comprador y precio en la propiedad
-        - cambia estado de la propiedad a 'offer_accepted'
-        - marca esta oferta como aceptada y las demás como rechazadas
-        """
-        for offer in self:
-            # 1. carga el comprador y precio en la propiedad
-            offer.property_id.buyer_id = offer.partner_id
-            offer.property_id.selling_price = offer.price
-
-            # 2. cambia el estado de la propiedad
-            offer.property_id.state = 'offer_accepted'
-
-            # 3. actualiza los estados
-            offer.status = 'accepted'
-            # rechaza las demás ofertas
-            other_offers = offer.property_id.offer_ids - offer
-            other_offers.write({'status': 'refused'})
