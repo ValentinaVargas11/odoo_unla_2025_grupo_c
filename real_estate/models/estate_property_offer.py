@@ -28,12 +28,12 @@ class EstatePropertyOffer(models.Model):
     #related='property_id.property_type_name',
     #store=True,
     #)
-    #property_type_id = fields.Many2one(
-    #comodel_name='estate.property.type',
-    #string="Tipo de propiedad",
-    #related='property_id.property_type_id',
-    #store=True,
-#)
+    property_type_id = fields.Many2one(
+    comodel_name='estate.property.type',
+    string="Tipo de propiedad",
+    related='property_id.property_type_id',
+    store=True,
+)
 
     
 
