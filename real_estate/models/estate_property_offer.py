@@ -1,6 +1,7 @@
 from odoo import models, fields
 from datetime import timedelta
 from odoo import api
+from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
@@ -21,6 +22,28 @@ class EstatePropertyOffer(models.Model):
         comodel_name = "estate.property",
         string = "Propiedad", required = True
     )
+    
+    # Unidad 2 - Ejercicio 16 
+    def action_accept_offer(self):
+        for offer in self:
+            if offer.status == 'accepted':
+                raise UserError("Esta oferta ya fue aceptada.")
+            offer.status = 'accepted'
+
+            property = offer.property_id
+            property.buyer_id = offer.partner_id
+            property.selling_price = offer.price
+            property.state = 'offer_accepted'
+
+            other_offers = property.offer_ids - offer
+            other_offers.write({'status': 'refused'})
+
+    def action_refuse_offer(self):
+        for offer in self:
+            if offer.status == 'accepted':
+                raise UserError("No se puede rechazar una oferta ya aceptada.")
+            offer.status = 'refused'
+
 
     #Punto 11
     #property_type_name = fields.Char(
