@@ -200,3 +200,10 @@ class EstateProperty(models.Model):
             # Mantenemos las etiquetas existentes y agregamos esta
             record.tag_ids = [Command.link(tag.id) for tag in record.tag_ids] + [Command.link(new_tag.id)]
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        for p in self:
+            if p.state not in ["new", "canceled"] :
+                raise UserError(("Propiedad no puede ser eliminado cuando el estado no esta en Nuevo o Cancelado"))
+            
+
