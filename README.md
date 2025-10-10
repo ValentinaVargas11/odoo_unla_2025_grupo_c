@@ -1,4 +1,7 @@
 # ERP con Odoo - Grupo C
+**Objetivo:**
+
+El propósito principal de este proyecto es explorar y aplicar los conceptos de sistemas ERP mediante la personalización y extensión de módulos en Odoo. El énfasis está en diseñar un sistema que se adapte a los requerimientos de una organización ficticia, integrando módulos estándar y desarrollos propios para cubrir necesidades específicas
 
 **Entorno de desarrollo:**  
 - Máquina virtual: Ubuntu 22.04  
