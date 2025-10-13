@@ -6,6 +6,6 @@
     'depends': ['real_estate', 'account'], #account, real estate
     'data': [], #'views/account_move_views.xml'
     'installable': True,
-    'application': False,
-    'auto_install': False,
+    'application': True,
+    'auto_install': True,
 }

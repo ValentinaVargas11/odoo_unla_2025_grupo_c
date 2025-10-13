@@ -73,7 +73,15 @@ class EstateProperty(models.Model):
         inverse_name = "property_id",
         string = "Ofertas"
     ) 
-    
+
+    # Unidad 2 - Ejercicio 27
+    invoice_id = fields.Many2one(
+        'account.move',
+        string="Factura",
+        readonly=True,
+        copy=False
+    )
+
     # Unidad 2 - Ejercicio 13
     @api.onchange('garden')
     def _onchange_garden(self):
