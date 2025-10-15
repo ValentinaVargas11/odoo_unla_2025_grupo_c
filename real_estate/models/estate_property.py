@@ -4,6 +4,7 @@ import random
 from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo import Command
+#import wdb
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Propiedades'
@@ -129,6 +130,7 @@ class EstateProperty(models.Model):
     # Unidad 2 - Ejercicio 15
     def action_mark_sold(self):
         """Marca la propiedad como vendida"""
+        #wdb.set_trace()
         for record in self:
             if record.state == 'canceled':
                 raise UserError("No se puede vender una propiedad cancelada")

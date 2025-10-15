@@ -1,13 +1,13 @@
 from odoo import Command, fields, models
 from odoo.exceptions import UserError
-
+#import wdb
 class EstateProperty(models.Model):
     _inherit = "estate.property"
 
-    def action_sold(self):
-        #raise UserError("Estro al metodo del modulo estate_ acount")
+    def action_mark_sold(self):
+        #wdb.set_trace()
         for property in self:
-            self.env["account.move"].create = ({
+            self.env["account.move"].create({
                 "partner_id": property.buyer_id.id,  # a. partner_id = comprador
                 "move_type": "out_invoice",  # b. move_type = "out_invoice"
                 "property_id": property.id,
@@ -26,4 +26,4 @@ class EstateProperty(models.Model):
                     }),
                 ],
             }) 
-        return super().action_sold()
+        return super().action_mark_sold()
