@@ -7,6 +7,12 @@ class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'Oferta sobre propiedad'
 
+    #Ejercicio 18 uni 2
+    _sql_constraints = [
+        ("unique_offer_id", "UNIQUE(partner_id, property_id)", "Una misma persona no puede hacer mas de una oferta en la misma propiedad")
+    ]
+
+
     price = fields.Float(string="Precio", required=True)
     status = fields.Selection(
         [
@@ -20,7 +26,8 @@ class EstatePropertyOffer(models.Model):
     )
     property_id = fields.Many2one(
         comodel_name = "estate.property",
-        string = "Propiedad", required = True
+        string = "Propiedad", required = True,
+        ondelete='cascade'
     )
     
     # Unidad 2 - Ejercicio 16 
@@ -86,5 +93,20 @@ class EstatePropertyOffer(models.Model):
             if record.date_deadline:
                 record.validity = (record.date_deadline - create.date()).days
 
-    
-
+    @api.model
+    def create(self, data_list):
+        if not isinstance(data_list, list):
+            data_list = [data_list]
+        for data in data_list:
+            property_id= self.env["estate.property"].browse(data["property_id"])
+            offer_ids = property_id.offer_ids
+            if property_id.state not in ('new','offer_received'):
+                raise UserError(f"No se pueden crear ofertas para una propiedad que está en estado '{property_id.state}'.")
+            elif offer_ids and data["price"]<= max(offer_ids.mapped("price")) if offer_ids else 0 :
+                raise UserError("La oferta no debe ser menor a la oferta mejor registrada")
+            
+        new_offers = super(EstatePropertyOffer, self).create(data_list)
+        properties_to_update = new_offers.mapped('property_id')
+        if properties_to_update:
+            properties_to_update.write({'state':'offer_received'})
+        return new_offers
