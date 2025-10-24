@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem 
+            id="menu_sale_channel_config"
+            name="Canales de Venta"
+            parent="sale.menu_sale_config" 
+            action="sale_channel_action"
+            sequence="20"
+        />
+    </data>
+</odoo>
