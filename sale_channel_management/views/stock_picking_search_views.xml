@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_search_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.search.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <!-- campo en búsqueda -->
+                <field name="origin" position="after">
+                    <field name="channel_id" string="Canal de Venta"/>
+                </field>
+                
+                <!-- filtro para canal de venta -->
+                <filter name="filter_channel" string="Canal de Venta" 
+                        domain="[('channel_id', '!=', False)]"/>
+                
+                <!-- agrupación por canal -->
+                <group string="Agrupar por" name="group_by">
+                    <filter string="Canal de Venta" name="group_by_channel" 
+                            context="{'group_by': 'channel_id'}"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>
