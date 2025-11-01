@@ -10,7 +10,8 @@
         'views/sale_channel_menu_item.xml',
         'views/sale_order_views.xml',
         'views/stock_picking_views.xml',
-        'views/stock_picking_search_views.xml'
+        'views/stock_picking_search_views.xml',
+        'views/sale_order_view_inherit.xml',
     ], 
     'installable': True,
     'application': True,
