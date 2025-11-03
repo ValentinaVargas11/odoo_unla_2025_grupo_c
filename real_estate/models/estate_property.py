@@ -1,5 +1,10 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, models, fields
+import random
+from odoo.exceptions import UserError
+from odoo.osv import expression
+from odoo import Command
+#import wdb
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Propiedades'
@@ -90,7 +95,15 @@ class EstateProperty(models.Model):
         inverse_name = "property_id",
         string = "Ofertas"
     ) 
-    
+
+    # Unidad 2 - Ejercicio 27
+    invoice_id = fields.Many2one(
+        'account.move',
+        string="Factura",
+        readonly=True,
+        copy=False
+    )
+
     # Unidad 2 - Ejercicio 13
     @api.onchange('garden')
     def _onchange_garden(self):
@@ -117,6 +130,7 @@ class EstateProperty(models.Model):
     # Unidad 2 - Ejercicio 15
     def action_mark_sold(self):
         """Marca la propiedad como vendida"""
+        #wdb.set_trace()
         for record in self:
             if record.state == 'canceled':
                 raise UserError("No se puede vender una propiedad cancelada")
@@ -128,3 +142,78 @@ class EstateProperty(models.Model):
             if record.state == 'sold':
                 raise UserError("No se puede cancelar una propiedad vendida")
             record.state = 'canceled'
+
+    
+
+    #Unidad 2 - Ejercicio 19
+    offer_partner_ids = fields.Many2many(
+    comodel_name="res.partner",
+    compute="_compute_offer_partner_ids",
+    string="Ofertantes",
+    store=True
+    )
+
+    @api.depends("offer_ids.partner_id")
+    def _compute_offer_partner_ids(self):
+        for record in self:
+         record.offer_partner_ids = record.offer_ids.mapped("partner_id")
+
+
+    #Unidad 2 - Ejercicio 20
+    def action_generate_auto_offer(self):
+        for property in self:
+            # Se necita un "precio esperado definido"
+            if not property.expected_price:
+                raise UserError("La propiedad no tiene precio esperado definido.")
+
+            # Calcular precio con +/- 30%
+            percentage = random.uniform(-0.3, 0.3)
+            adjusted_price = property.expected_price * (1 + percentage)
+
+            # Obtener los partners activos que no hayan ofertado
+            existing_partners = property.offer_partner_ids.ids
+            eligible_partners = self.env['res.partner'].search([
+                ('active', '=', True),
+                ('id', 'not in', existing_partners)
+            ])
+
+            if not eligible_partners:
+                raise UserError("No hay contactos activos disponibles para ofertar.")
+
+            selected_partner = random.choice(eligible_partners)
+
+            # Crear la oferta
+            self.env['estate.property.offer'].create({
+                'price': adjusted_price,
+                'partner_id': selected_partner.id,
+                'property_id': property.id,
+            })
+
+    #Unidad 2 - Ejercicio 21
+    def action_clear_tags(self):
+        for record in self:
+            record.tag_ids = [Command.clear()]
+
+    def action_assign_all_tags(self):
+        all_tags = self.env['estate.property.tag'].search([])
+        for record in self:
+            record.tag_ids = [Command.set(all_tags.ids)]
+
+    def action_add_new_tag(self):
+        tag_model = self.env['estate.property.tag']
+        new_tag = tag_model.search([('name', '=', 'A estrenar')], limit=1)
+
+        if not new_tag:
+            new_tag = tag_model.create({'name': 'A estrenar'})
+
+        for record in self:
+            # Mantenemos las etiquetas existentes y agregamos esta
+            record.tag_ids = [Command.link(tag.id) for tag in record.tag_ids] + [Command.link(new_tag.id)]
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        for p in self:
+            if p.state not in ["new", "canceled"] :
+                raise UserError(("Propiedad no puede ser eliminado cuando el estado no esta en Nuevo o Cancelado"))
+            
+

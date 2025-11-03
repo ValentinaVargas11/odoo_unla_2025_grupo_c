@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+
+    <record id="sale_channel_action" model="ir.actions.act_window">
+        <field name="name">Canales de Venta</field>
+        <field name="res_model">sale.channel</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p> Crear un nuevo canal de venta. </p>
+        </field>
+    </record>
+
+    <record id="sale_channel_view_list" model="ir.ui.view">
+        <field name="name">sale.channel.view.list</field>
+        <field name="model">sale.channel</field>
+        
+        <field name="arch" type="xml">
+            <list string="Canales de Venta">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="warehouse_id"/>
+                <field name="journal_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="sale_channel_view_form" model="ir.ui.view">
+        <field name="name">sale.channel.view.form</field>
+        <field name="model">sale.channel</field>
+        <field name="arch" type="xml">
+        <form string="Canal de Venta">
+            <sheet>
+                <group>
+                    <field name="name"/> 
+                    <field name="code"/>
+                </group>
+                <group>
+                    <field name="warehouse_id"/> 
+                    <field name="journal_id"/>
+                </group>
+            </sheet>
+        </form>
+        </field>
+        
+        
+        
+    </record>
+    </data>
+</odoo>

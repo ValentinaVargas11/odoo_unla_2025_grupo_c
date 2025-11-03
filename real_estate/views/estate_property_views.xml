@@ -70,6 +70,28 @@
                             string="Marcar como vendida"
                             class="btn-primary"
                             invisible="state not in ['offer_accepted']"/>
+                        
+                            <!-- Unidad 2 - Ejercicio 20-->
+                        <button name="action_generate_auto_offer"
+                            type="object"
+                            string="Generar oferta automática"
+                            class="btn-primary"/>
+
+                        <!-- Unidad 2 - Ejercicio 21 -->
+                        <button name="action_clear_tags"
+                            type="object"
+                            string="Quitar etiquetas"
+                            class="btn-secondary"/>
+
+                        <button name="action_assign_all_tags"   
+                            type="object"
+                            string="Cargar todas las etiquetas"
+                            class="btn-secondary"/>
+
+                        <button name="action_add_new_tag"
+                            type="object"
+                            string="A estrenar"
+                            class="btn-secondary"/>
                         <field name="state" widget="statusbar" />
                     </header>
                     <sheet>
@@ -82,6 +104,7 @@
                         </group>
                         <group>
                             <group>
+                                <field name="tag_ids" widget="many2many_tags"/>
                                 <field name="property_type_id" />
                                 <field name="postcode" />
                                 <field name="date_availability" />
@@ -115,6 +138,8 @@
                             <page name="offers" string="Ofertas">
                                 <group>
                                     <field name="offer_ids" />
+                                    <!-- Unidad 2 - Ejercicio 19 -->
+                                    <field name="offer_partner_ids" widget="many2many_tags"/>
                                 </group>
                             </page>
 
