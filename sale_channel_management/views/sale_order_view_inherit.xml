@@ -1,0 +1,37 @@
+<odoo>
+    <!-- formulario -->
+    <record id="view_order_form_inherit_channel" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.channel</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="canal_id" required="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Se ve canales de venta -->
+    <record id="view_order_tree_inherit_channel" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.channel</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="canal_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Filtro en el buscador  -->
+    <record id="view_order_search_inherit_channel" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit.channel</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Canal de venta" name="canal" context="{'group_by': 'canal_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
